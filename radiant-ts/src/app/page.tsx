@@ -1,3 +1,5 @@
+// Main Page 
+
 import { BentoCard } from '@/components/bento-card'
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
@@ -22,10 +24,12 @@ export const metadata: Metadata = {
     'Radiant helps you sell more by revealing sensitive information about your customers.',
 }
 
+
+// Top Section of the page (includes the navbar and the hero section)
 function Hero() {
   return (
     <div className="relative">
-      <Gradient className="absolute bottom-0 inset-2 rounded-4xl ring-1 ring-inset ring-black/5" />
+      <Gradient className="absolute bottom-0 inset-2 ring-1 ring-inset rounded-4xl ring-black/5" />
       <Container className="relative">
         <Navbar
           banner={
@@ -39,13 +43,13 @@ function Hero() {
           }
         />
         <div className="pt-16 pb-24 sm:pb-32 sm:pt-24 md:pb-48 md:pt-32">
-          <h1 className="font-display text-balance text-6xl/[0.9] font-medium tracking-tight text-gray-950 sm:text-8xl/[0.8] md:text-9xl/[0.8]">
+          <h1 className="font-display text-balance text-4xl/[0.9] font-medium tracking-tight text-gray-950 sm:text-6xl/[0.8] md:text-7xl/[0.8]"          >
           Flexible Financing Built for Lasting Partnerships
           </h1>
-          <p className="max-w-lg mt-8 font-medium text-xl/7 text-gray-950/75 sm:text-2xl/8">
+          <p className="mt-8 max-w-lg font-medium text-xl/7 text-gray-950/75 sm:text-2xl/8">
             Trusted financing solutions that grow with your vision and goals.
           </p>
-          <div className="flex flex-col mt-12 gap-x-6 gap-y-4 sm:flex-row">
+          <div className="flex flex-col gap-y-4 gap-x-6 mt-12 sm:flex-row">
             <Button href="/blog">Apply Now</Button>
             <Button variant="secondary" href="/pricing">
               View Case Studies
@@ -58,29 +62,12 @@ function Hero() {
 }
 
 
-function FeatureSection() {
-  return (
-    <div className="overflow-hidden">
-      <Container className="pb-24">
-        <Heading as="h2" className="max-w-3xl">
-          Integrate with your data and understand your business.
-        </Heading>
-        <Screenshot
-          width={1216}
-          height={768}
-          src="/screenshots/app.png"
-          className="mt-16 h-[36rem] sm:h-auto sm:w-[76rem]"
-        />
-      </Container>
-    </div>
-  )
-}
 
 function BentoSection() {
   return (
     <Container>
       <Subheading>Financing Solutions</Subheading>
-      <Heading as="h3" className="max-w-3xl mt-2">
+      <Heading as="h3" className="mt-2 max-w-3xl">
         Identify the best financing solution.
       </Heading>
 
@@ -140,7 +127,7 @@ function DarkBentoSection() {
     <div className="py-32 mx-2 mt-2 bg-gray-900 rounded-4xl">
       <Container>
         <Subheading dark>Outreach</Subheading>
-        <Heading as="h3" dark className="max-w-3xl mt-2">
+        <Heading as="h3" dark className="mt-2 max-w-3xl">
           Customer outreach has never been easier.
         </Heading>
 
@@ -199,7 +186,7 @@ export default function Home() {
           <LogoCloud />
         </Container>
         <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
-          <FeatureSection />
+
           <BentoSection />
         </div>
         <DarkBentoSection />

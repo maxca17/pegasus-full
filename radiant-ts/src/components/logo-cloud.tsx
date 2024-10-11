@@ -12,12 +12,12 @@ export function LogoCloud({
     >
       <img
         alt="Cuts"
-        src="/logo-cloud/cuts.jpg"
+        src="/logo-cloud/cuts.png"
         className="h-9 max-sm:mx-auto sm:h-8 lg:h-12"
       />
       <img
         alt="Mezcla"
-        src="/logo-cloud/mezcla.jpg"
+        src="/logo-cloud/mezcla.png"
         className="h-9 max-sm:mx-auto sm:h-8 lg:h-12"
       />
       <img
