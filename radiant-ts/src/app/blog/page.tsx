@@ -303,7 +303,6 @@ export default function IntakeForm() {
                     />
                   </div>
                 </div>
-
                 {/* Cash Flow Statement */}
                 <div>
                   <label htmlFor="cash-flow-statement" className="block text-sm font-medium leading-6 text-gray-900">
@@ -320,23 +319,43 @@ export default function IntakeForm() {
                   </div>
                 </div>
 
-                {/* Additional Supporting Documents */}
                 <div>
-                  <label htmlFor="additional-documents" className="block text-sm font-medium leading-6 text-gray-900">
-                    Additional Supporting Documents
+                  <label htmlFor="latest-company-deck" className="block text-sm font-medium leading-6 text-gray-900">
+                    Latest Company Deck
                   </label>
-                  <p className="mt-1 text-sm text-gray-600">
-                    Upload any additional documents such as budget models, velocities, etc.
-                  </p>
                   <div className="mt-2">
                     <input
-                      id="additional-documents"
-                      name="additional-documents"
+                      id="latest-company-deck"
+                      name="latest-company-deck"
                       type="file"
-                      multiple
+                      required
                       className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
                     />
                   </div>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          {/* Additional Supporting Documents */}
+          <section>
+            <h2 className="text-2xl font-medium tracking-tight">Additional Supporting Documents</h2>
+            <p className="mt-4 text-gray-600 text-sm/6">
+              Upload any additional documents such as budget models, velocities, etc.
+            </p>
+            <form className="mt-8">
+              <div>
+                <label htmlFor="additional-documents" className="block text-sm font-medium leading-6 text-gray-900">
+                  Additional Supporting Documents
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="additional-documents"
+                    name="additional-documents"
+                    type="file"
+                    multiple
+                    className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                  />
                 </div>
               </div>
             </form>
@@ -358,3 +377,4 @@ export default function IntakeForm() {
     </main>
   )
 }
+
