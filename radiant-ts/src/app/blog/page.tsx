@@ -1,384 +1,360 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { Footer } from '@/components/footer'
+import { Navbar } from '@/components/navbar'
+import { Container } from '@/components/container'
+import { GradientBackground } from '@/components/gradient'
+import { Button } from '@/components/button' // Assuming you have a Button component
 
-export default function Example() {
+export default function IntakeForm() {
   return (
-    <div className="space-y-10 divide-y divide-gray-900/10">
-      <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
-        <div className="px-4 sm:px-0">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Profile</h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            This information will be displayed publicly so be careful what you share.
-          </p>
-        </div>
+    <main className="overflow-hidden">
+      <GradientBackground />
+      <Container>
+        <Navbar />
+      </Container>
+      <Container className="mt-16">
+        <div className="space-y-16">
+          {/* Personal Information */}
+          <section>
+            <h2 className="text-2xl font-medium tracking-tight">Personal Information</h2>
+            <p className="mt-4 text-gray-600 text-sm/6">
+              Please provide your personal details below.
+            </p>
+            <form className="mt-8">
+              <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                {/* Name */}
+                <div className="sm:col-span-3">
+                  <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+                    Name
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      className="block px-3 py-2 w-full placeholder-gray-400 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
 
-        <form className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-          <div className="px-4 py-6 sm:p-8">
-            <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-4">
-                <label htmlFor="website" className="block text-sm font-medium leading-6 text-gray-900">
-                  Website
-                </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <span className="flex items-center pl-3 text-gray-500 select-none sm:text-sm">http://</span>
+                {/* Email */}
+                <div className="sm:col-span-3">
+                  <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                    Email
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      className="block px-3 py-2 w-full placeholder-gray-400 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                {/* Phone Number */}
+                <div className="sm:col-span-3">
+                  <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
+                    Phone Number
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      required
+                      className="block px-3 py-2 w-full placeholder-gray-400 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          {/* Company Information */}
+          <section>
+            <h2 className="text-2xl font-medium tracking-tight">Company Information</h2>
+            <p className="mt-4 text-gray-600 text-sm/6">
+              Provide details about your company.
+            </p>
+            <form className="mt-8">
+              <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                {/* Website */}
+                <div className="sm:col-span-4">
+                  <label htmlFor="website" className="block text-sm font-medium leading-6 text-gray-900">
+                    Website
+                  </label>
+                  <div className="mt-2">
                     <input
                       id="website"
                       name="website"
+                      type="url"
+                      required
+                      placeholder="https://www.example.com"
+                      className="block px-3 py-2 w-full placeholder-gray-400 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                {/* Company Description */}
+                <div className="col-span-full">
+                  <label htmlFor="company-description" className="block text-sm font-medium leading-6 text-gray-900">
+                    Company Description
+                  </label>
+                  <div className="mt-2">
+                    <textarea
+                      id="company-description"
+                      name="company-description"
+                      rows={4}
+                      required
+                      className="block px-3 py-2 w-full placeholder-gray-400 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                {/* Company Type */}
+                <div className="sm:col-span-3">
+                  <label htmlFor="company-type" className="block text-sm font-medium leading-6 text-gray-900">
+                    Company Type
+                  </label>
+                  <div className="mt-2">
+                    <select
+                      id="company-type"
+                      name="company-type"
+                      required
+                      className="block px-3 py-2 w-full text-gray-900 bg-white rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    >
+                      <option value="">Select a type</option>
+                      <option>LLC</option>
+                      <option>Corporation</option>
+                      <option>Partnership</option>
+                      <option>Sole Proprietorship</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Funding Requirement */}
+                <div className="sm:col-span-3">
+                  <label htmlFor="funding-requirement" className="block text-sm font-medium leading-6 text-gray-900">
+                    Funding Requirement
+                  </label>
+                  <div className="mt-2">
+                    <select
+                      id="funding-requirement"
+                      name="funding-requirement"
+                      required
+                      className="block px-3 py-2 w-full text-gray-900 bg-white rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    >
+                      <option value="">Select an amount</option>
+                      <option>$0 - $50,000</option>
+                      <option>$50,001 - $100,000</option>
+                      <option>$100,001 - $500,000</option>
+                      <option>$500,001 - $1,000,000</option>
+                      <option>$1,000,001+</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Business Legal Name */}
+                <div className="sm:col-span-3">
+                  <label htmlFor="legal-name" className="block text-sm font-medium leading-6 text-gray-900">
+                    Business Legal Name
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="legal-name"
+                      name="legal-name"
                       type="text"
-                      placeholder="www.example.com"
-                      className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      required
+                      className="block px-3 py-2 w-full placeholder-gray-400 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                {/* Legal Entity Type */}
+                <div className="sm:col-span-3">
+                  <label htmlFor="legal-entity-type" className="block text-sm font-medium leading-6 text-gray-900">
+                    Legal Entity Type
+                  </label>
+                  <div className="mt-2">
+                    <select
+                      id="legal-entity-type"
+                      name="legal-entity-type"
+                      required
+                      className="block px-3 py-2 w-full text-gray-900 bg-white rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    >
+                      <option value="">Select a type</option>
+                      {/* Replace with your provided list */}
+                      <option>LLC</option>
+                      <option>C-Corporation</option>
+                      <option>S-Corporation</option>
+                      <option>Partnership</option>
+                      <option>Sole Proprietorship</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* EIN */}
+                <div className="sm:col-span-3">
+                  <label htmlFor="ein" className="block text-sm font-medium leading-6 text-gray-900">
+                    EIN
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="ein"
+                      name="ein"
+                      type="text"
+                      required
+                      placeholder="XX-XXXXXXX"
+                      className="block px-3 py-2 w-full placeholder-gray-400 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                {/* Monthly Revenue Range */}
+                <div className="sm:col-span-3">
+                  <label htmlFor="monthly-revenue" className="block text-sm font-medium leading-6 text-gray-900">
+                    Monthly Revenue Range
+                  </label>
+                  <div className="mt-2">
+                    <select
+                      id="monthly-revenue"
+                      name="monthly-revenue"
+                      required
+                      className="block px-3 py-2 w-full text-gray-900 bg-white rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    >
+                      <option value="">Select a range</option>
+                      <option>$0 - $10,000</option>
+                      <option>$10,001 - $50,000</option>
+                      <option>$50,001 - $100,000</option>
+                      <option>$100,001 - $500,000</option>
+                      <option>$500,001+</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          {/* NDA Placeholder */}
+          <section>
+            <h2 className="text-2xl font-medium tracking-tight">Non-Disclosure Agreement</h2>
+            <p className="mt-4 text-gray-600 text-sm/6">
+              Please review and agree to our standard mutual NDA before proceeding.
+            </p>
+            {/* Placeholder for NDA content */}
+            <div className="p-4 mt-6 bg-gray-50 rounded-md">
+              {/* Replace this with your actual NDA content or a link */}
+              <p className="text-gray-600 text-sm/6">
+                [Standard Dream mNDA content goes here.]
+              </p>
+            </div>
+            <div className="flex items-center mt-4">
+              <input
+                id="agree-nda"
+                name="agree-nda"
+                type="checkbox"
+                required
+                className="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-600"
+              />
+              <label htmlFor="agree-nda" className="block ml-2 text-sm text-gray-900">
+                I have read and agree to the Non-Disclosure Agreement
+              </label>
+            </div>
+          </section>
+
+          {/* Financial Information */}
+          <section>
+            <h2 className="text-2xl font-medium tracking-tight">Financial Information</h2>
+            <p className="mt-4 text-gray-600 text-sm/6">
+              Upload your financial documents below.
+            </p>
+            <form className="mt-8">
+              <div className="space-y-8">
+                {/* Income Statement */}
+                <div>
+                  <label htmlFor="income-statement" className="block text-sm font-medium leading-6 text-gray-900">
+                    Income Statement
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="income-statement"
+                      name="income-statement"
+                      type="file"
+                      required
+                      className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                    />
+                  </div>
+                </div>
+
+                {/* Balance Sheet */}
+                <div>
+                  <label htmlFor="balance-sheet" className="block text-sm font-medium leading-6 text-gray-900">
+                    Balance Sheet
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="balance-sheet"
+                      name="balance-sheet"
+                      type="file"
+                      required
+                      className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                    />
+                  </div>
+                </div>
+
+                {/* Cash Flow Statement */}
+                <div>
+                  <label htmlFor="cash-flow-statement" className="block text-sm font-medium leading-6 text-gray-900">
+                    Cash Flow Statement
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="cash-flow-statement"
+                      name="cash-flow-statement"
+                      type="file"
+                      required
+                      className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                    />
+                  </div>
+                </div>
+
+                {/* Additional Supporting Documents */}
+                <div>
+                  <label htmlFor="additional-documents" className="block text-sm font-medium leading-6 text-gray-900">
+                    Additional Supporting Documents
+                  </label>
+                  <p className="mt-1 text-sm text-gray-600">
+                    Upload any additional documents such as budget models, velocities, etc.
+                  </p>
+                  <div className="mt-2">
+                    <input
+                      id="additional-documents"
+                      name="additional-documents"
+                      type="file"
+                      multiple
+                      className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
                     />
                   </div>
                 </div>
               </div>
+            </form>
+          </section>
 
-              <div className="col-span-full">
-                <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
-                  About
-                </label>
-                <div className="mt-2">
-                  <textarea
-                    id="about"
-                    name="about"
-                    rows={3}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={''}
-                  />
-                </div>
-                <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about yourself.</p>
-              </div>
-
-              <div className="col-span-full">
-                <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
-                  Photo
-                </label>
-                <div className="flex items-center mt-2 gap-x-3">
-                  <UserCircleIcon aria-hidden="true" className="w-12 h-12 text-gray-300" />
-                  <button
-                    type="button"
-                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                  >
-                    Change
-                  </button>
-                </div>
-              </div>
-
-              <div className="col-span-full">
-                <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
-                  Cover photo
-                </label>
-                <div className="flex justify-center px-6 py-10 mt-2 border border-dashed rounded-lg border-gray-900/25">
-                  <div className="text-center">
-                    <PhotoIcon aria-hidden="true" className="w-12 h-12 mx-auto text-gray-300" />
-                    <div className="flex mt-4 text-sm leading-6 text-gray-600">
-                      <label
-                        htmlFor="file-upload"
-                        className="relative font-semibold text-indigo-600 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                      >
-                        <span>Upload a file</span>
-                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                      </label>
-                      <p className="pl-1">or drag and drop</p>
-                    </div>
-                    <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Submit Button */}
+          <div className="flex justify-end items-center mt-8">
+            {/* Using your Button component for consistency */}
+            <Button type="submit" className="px-6 py-3">
+              Submit
+            </Button>
           </div>
-          <div className="flex items-center justify-end px-4 py-4 border-t gap-x-6 border-gray-900/10 sm:px-8">
-            <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div className="grid grid-cols-1 pt-10 gap-x-8 gap-y-8 md:grid-cols-3">
-        <div className="px-4 sm:px-0">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
         </div>
-
-        <form className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-          <div className="px-4 py-6 sm:p-8">
-            <div className="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
-                <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
-                  First name
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="first-name"
-                    name="first-name"
-                    type="text"
-                    autoComplete="given-name"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-3">
-                <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
-                  Last name
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="last-name"
-                    name="last-name"
-                    type="text"
-                    autoComplete="family-name"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-4">
-                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-4">
-                <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
-                  Country
-                </label>
-                <div className="mt-2">
-                  <select
-                    id="country"
-                    name="country"
-                    autoComplete="country-name"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                  >
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>Mexico</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="col-span-full">
-                <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-gray-900">
-                  Street address
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="street-address"
-                    name="street-address"
-                    type="text"
-                    autoComplete="street-address"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2 sm:col-start-1">
-                <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
-                  City
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="city"
-                    name="city"
-                    type="text"
-                    autoComplete="address-level2"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label htmlFor="region" className="block text-sm font-medium leading-6 text-gray-900">
-                  State / Province
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="region"
-                    name="region"
-                    type="text"
-                    autoComplete="address-level1"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900">
-                  ZIP / Postal code
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="postal-code"
-                    name="postal-code"
-                    type="text"
-                    autoComplete="postal-code"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center justify-end px-4 py-4 border-t gap-x-6 border-gray-900/10 sm:px-8">
-            <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Save
-            </button>
-          </div>
-        </form>
+      </Container>
+      {/* Adjusted Footer to cover the whole screen */}
+      <div className="mt-16">
+        <Footer />
       </div>
-
-      <div className="grid grid-cols-1 pt-10 gap-x-8 gap-y-8 md:grid-cols-3">
-        <div className="px-4 sm:px-0">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Notifications</h2>
-        </div>
-
-        <form className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-          <div className="px-4 py-6 sm:p-8">
-            <div className="max-w-2xl space-y-10">
-              <fieldset>
-                <legend className="text-sm font-semibold leading-6 text-gray-900">By Email</legend>
-                <div className="mt-6 space-y-6">
-                  <div className="relative flex gap-x-3">
-                    <div className="flex items-center h-6">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-600"
-                      />
-                    </div>
-                    <div className="text-sm leading-6">
-                      <label htmlFor="comments" className="font-medium text-gray-900">
-                        Comments
-                      </label>
-                      <p className="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                    </div>
-                  </div>
-                  <div className="relative flex gap-x-3">
-                    <div className="flex items-center h-6">
-                      <input
-                        id="candidates"
-                        name="candidates"
-                        type="checkbox"
-                        className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-600"
-                      />
-                    </div>
-                    <div className="text-sm leading-6">
-                      <label htmlFor="candidates" className="font-medium text-gray-900">
-                        Candidates
-                      </label>
-                      <p className="text-gray-500">Get notified when a candidate applies for a job.</p>
-                    </div>
-                  </div>
-                  <div className="relative flex gap-x-3">
-                    <div className="flex items-center h-6">
-                      <input
-                        id="offers"
-                        name="offers"
-                        type="checkbox"
-                        className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-600"
-                      />
-                    </div>
-                    <div className="text-sm leading-6">
-                      <label htmlFor="offers" className="font-medium text-gray-900">
-                        Offers
-                      </label>
-                      <p className="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-              <fieldset>
-                <legend className="text-sm font-semibold leading-6 text-gray-900">Push Notifications</legend>
-                <p className="mt-1 text-sm leading-6 text-gray-600">
-                  These are delivered via SMS to your mobile phone.
-                </p>
-                <div className="mt-6 space-y-6">
-                  <div className="flex items-center gap-x-3">
-                    <input
-                      id="push-everything"
-                      name="push-notifications"
-                      type="radio"
-                      className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-600"
-                    />
-                    <label htmlFor="push-everything" className="block text-sm font-medium leading-6 text-gray-900">
-                      Everything
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-x-3">
-                    <input
-                      id="push-email"
-                      name="push-notifications"
-                      type="radio"
-                      className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-600"
-                    />
-                    <label htmlFor="push-email" className="block text-sm font-medium leading-6 text-gray-900">
-                      Same as email
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-x-3">
-                    <input
-                      id="push-nothing"
-                      name="push-notifications"
-                      type="radio"
-                      className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-600"
-                    />
-                    <label htmlFor="push-nothing" className="block text-sm font-medium leading-6 text-gray-900">
-                      No push notifications
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
-            </div>
-          </div>
-          <div className="flex items-center justify-end px-4 py-4 border-t gap-x-6 border-gray-900/10 sm:px-8">
-            <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    </main>
   )
 }
