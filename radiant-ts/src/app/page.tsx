@@ -104,9 +104,9 @@ function BentoSection() {
           className="lg:col-span-2 lg:rounded-bl-4xl"
         />
         <BentoCard
-          eyebrow="Source"
-          title="Get the furthest reach"
-          description="Bypass those inconvenient privacy laws to source leads from the most unexpected places."
+          eyebrow="Adaptability"
+          title="Tailored Financial Solutions with Human Understanding"
+          description="No two businesses are alike. While our data-driven approach delivers precision, we also take time to understand the unique nuances of your business. By listening to your needs and adapting our solutions accordingly, we ensure our financial support evolves with your business’s growth, challenges, and opportunities."
           graphic={<LogoCluster />}
           className="lg:col-span-2"
         />
@@ -115,21 +115,22 @@ function BentoSection() {
   )
 }
 
+
 function DarkBentoSection() {
   return (
     <div className="py-32 mx-2 mt-2 bg-gray-900 rounded-4xl">
       <Container>
-        <Subheading dark>Outreach</Subheading>
+        <Subheading dark>How it Works</Subheading>
         <Heading as="h3" dark className="mt-2 max-w-3xl">
-          Customer outreach has never been easier.
+          The financing process has never been easier.
         </Heading>
 
         <div className="grid grid-cols-1 gap-4 mt-10 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
           <BentoCard
             dark
-            eyebrow="Networking"
-            title="Sell at the speed of light"
-            description="Our RadiantAI chat assistants analyze the sentiment of your conversations in real time, ensuring you're always one step ahead."
+            eyebrow="Initial Review"
+            title="Cursory Financial Assessment"
+            description="We begin by conducting a high-level review of your company's financials and basic business information. This preliminary analysis helps us quickly determine if it makes sense to move forward with a deeper dive into your financing needs."
             graphic={
               <div className="h-80 bg-[url(/screenshots/networking.png)] bg-[size:851px_344px] bg-no-repeat" />
             }
@@ -138,9 +139,9 @@ function DarkBentoSection() {
           />
           <BentoCard
             dark
-            eyebrow="Integrations"
-            title="Meet leads where they are"
-            description="With thousands of integrations, no one will be able to escape your cold outreach."
+            eyebrow="System Integration"
+            title="Seamless Data-Driven Underwriting"
+            description="Once we've determined the potential fit, we integrate with your systems using our unified API. This connection allows us to thoroughly assess your financial health, analyzing data from your accounting, sales, and operational platforms in real time."
             graphic={<LogoTimeline />}
             // `!overflow-visible` is needed to work around a Chrome bug that disables the mask on the graphic.
             className="z-10 !overflow-visible lg:col-span-2 lg:rounded-tr-4xl"

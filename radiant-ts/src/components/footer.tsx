@@ -15,7 +15,7 @@ function CallToAction() {
         </p>
       </hgroup>
       <p className="mx-auto mt-6 max-w-xs text-gray-500 text-sm/6">
-        Get the cheat codes for selling and unlock your team&apos;s revenue potential.
+        Click Apply Now to get started.
       </p>
       <div className="mt-6">
         <Button className="w-full sm:w-auto" href="/blog">

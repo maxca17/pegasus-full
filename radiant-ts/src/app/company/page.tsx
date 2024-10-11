@@ -21,17 +21,19 @@ function Header() {
         We’re on a mission to transform revenue organizations by harnessing vast
         amounts of illegally acquired customer data.
       </Lead>
-      <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
+      <section className="grid grid-cols-1 mt-16 lg:grid-cols-2 lg:gap-12">
         <div className="max-w-lg">
           <h2 className="text-2xl font-medium tracking-tight">Our mission</h2>
-          <p className="mt-6 text-sm/6 text-gray-600">
-            At Radiant, we are dedicated to transforming the way revenue
-            organizations source and close deals. Our mission is to provide our
-            customers with an unfair advantage over both their competitors and
-            potential customers through insight and analysis. We’ll stop at
-            nothing to get you the data you need to close a deal.
+          <p className="mt-6 text-gray-600 text-sm/6">
+            At Dream, we are committed to transforming the way businesses access flexible financing. Our mission is to provide tailored financial solutions that empower companies to unlock growth, streamline cash flow, and seize opportunities. Whether you need term loans, receivables financing, factoring, or custom credit solutions, we&apos;re here to provide the financial resources that meet your unique needs.
           </p>
-          <p className="mt-8 text-sm/6 text-gray-600">
+          <p className="mt-8 text-gray-600 text-sm/6">
+          We&apos;re client-focused — taking the time to build a comprehensive understanding of your business so we can offer financing that truly supports your goals. Our team works hand-in-hand with you, providing insights and clear options to ensure your business has the funding it needs to thrive.
+          </p>
+          <p className="mt-8 text-gray-600 text-sm/6">
+          We&apos;re not just offering financing — we&apos;re building partnerships. Our transparent process, with no hidden fees, ensures that our solutions grow with your business. From rapid assessments to full system integration, we&apos;re with you every step of the way, helping you make informed decisions that drive long-term success.
+          </p>
+          <p className="mt-8 text-gray-600 text-sm/6">
             We’re customer-obsessed — putting the time in to build a detailed
             financial picture of every one of our customers so that we know more
             about your business than you do. We are in this together, mostly
@@ -41,33 +43,33 @@ function Header() {
           </p>
         </div>
         <div className="pt-20 lg:row-span-2 lg:-mr-16 xl:mr-auto">
-          <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
-            <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
+          <div className="grid grid-cols-2 gap-4 -mx-8 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
+            <div className="overflow-hidden rounded-xl shadow-xl aspect-square outline-1 -outline-offset-1 outline-black/10">
               <img
                 alt=""
                 src="/company/1.jpg"
-                className="block size-full object-cover"
+                className="block object-cover size-full"
               />
             </div>
-            <div className="-mt-8 aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
+            <div className="overflow-hidden -mt-8 rounded-xl shadow-xl aspect-square outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
               <img
                 alt=""
                 src="/company/2.jpg"
-                className="block size-full object-cover"
+                className="block object-cover size-full"
               />
             </div>
-            <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
+            <div className="overflow-hidden rounded-xl shadow-xl aspect-square outline-1 -outline-offset-1 outline-black/10">
               <img
                 alt=""
                 src="/company/3.jpg"
-                className="block size-full object-cover"
+                className="block object-cover size-full"
               />
             </div>
-            <div className="-mt-8 aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
+            <div className="overflow-hidden -mt-8 rounded-xl shadow-xl aspect-square outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
               <img
                 alt=""
                 src="/company/4.jpg"
-                className="block size-full object-cover"
+                className="block object-cover size-full"
               />
             </div>
           </div>
@@ -75,27 +77,27 @@ function Header() {
         <div className="max-lg:mt-16 lg:col-span-1">
           <Subheading>The Numbers</Subheading>
           <hr className="mt-6 border-t border-gray-200" />
-          <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
-            <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-              <dt className="text-sm/6 text-gray-600">Raised</dt>
+          <dl className="grid grid-cols-1 gap-y-4 gap-x-8 mt-6 sm:grid-cols-2">
+            <div className="flex flex-col gap-y-2 pb-4 border-b border-gray-200 border-dotted">
+              <dt className="text-gray-600 text-sm/6">Invested</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
-                $<AnimatedNumber start={100} end={150} />M
+                $<AnimatedNumber start={5} end={60} />M
               </dd>
             </div>
-            <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-              <dt className="text-sm/6 text-gray-600">Companies</dt>
+            <div className="flex flex-col gap-y-2 pb-4 border-b border-gray-200 border-dotted">
+              <dt className="text-gray-600 text-sm/6">Companies</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
-                <AnimatedNumber start={15} end={30} />K
+                <AnimatedNumber start={15} end={100} />+
               </dd>
             </div>
             <div className="flex flex-col gap-y-2 max-sm:border-b max-sm:border-dotted max-sm:border-gray-200 max-sm:pb-4">
-              <dt className="text-sm/6 text-gray-600">Deals Closed</dt>
+              <dt className="text-gray-600 text-sm/6">Deals Closed</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
                 <AnimatedNumber start={0.9} end={1.5} decimals={1} />M
               </dd>
             </div>
             <div className="flex flex-col gap-y-2">
-              <dt className="text-sm/6 text-gray-600">Leads Generated</dt>
+              <dt className="text-gray-600 text-sm/6">Leads Generated</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
                 <AnimatedNumber start={150} end={200} />M
               </dd>
@@ -117,8 +119,8 @@ function Person({
   img: string
 }) {
   return (
-    <li className="flex items-center gap-4">
-      <img alt="" src={img} className="size-12 rounded-full" />
+    <li className="flex gap-4 items-center">
+      <img alt="" src={img} className="rounded-full size-12" />
       <div className="text-sm/6">
         <h3 className="font-medium">{name}</h3>
         <p className="text-gray-500">{description}</p>
@@ -138,9 +140,9 @@ function Team() {
         Radiant is founded by two of the best sellers in the business and backed
         by investors who look the other way.
       </Lead>
-      <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-12 mt-12 lg:grid-cols-2">
         <div className="max-w-lg">
-          <p className="text-sm/6 text-gray-600">
+          <p className="text-gray-600 text-sm/6">
             Years ago, while working as sales associates at rival companies,
             Thomas, Ben, and Natalie were discussing a big client they had all
             been competing for. Joking about seeing the terms of each other’s
@@ -149,7 +151,7 @@ function Team() {
             be an incredible success, and that idea became the kernel for
             Radiant.
           </p>
-          <p className="mt-8 text-sm/6 text-gray-600">
+          <p className="mt-8 text-gray-600 text-sm/6">
             Today, Radiant transforms revenue organizations by harnessing
             illegally acquired customer and competitor data, using it to provide
             extraordinary leverage. More than 30,000 companies rely on Radiant
@@ -167,7 +169,7 @@ function Team() {
             <img
               alt=""
               src="/company/5.jpg"
-              className="block size-full object-cover"
+              className="block object-cover size-full"
             />
           </div>
         </div>
@@ -178,7 +180,7 @@ function Team() {
       <hr className="mt-6 border-t border-gray-200" />
       <ul
         role="list"
-        className="mx-auto mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid grid-cols-1 gap-8 mx-auto mt-16 sm:grid-cols-2 lg:grid-cols-3"
       >
         <Person
           name="Michael Foster"
@@ -247,7 +249,7 @@ function Investors() {
       <hr className="mt-6 border-t border-gray-200" />
       <ul
         role="list"
-        className="mx-auto mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2"
+        className="grid grid-cols-1 gap-8 mx-auto mt-10 lg:grid-cols-2"
       >
         <li>
           <img
@@ -255,7 +257,7 @@ function Investors() {
             src="/investors/remington-schwartz.svg"
             className="h-14"
           />
-          <p className="mt-6 max-w-lg text-sm/6 text-gray-500">
+          <p className="mt-6 max-w-lg text-gray-500 text-sm/6">
             Remington Schwartz has been a driving force in the tech industry,
             backing bold entrepreneurs who explore grey areas in financial and
             privacy law. Their deep industry expertise and extensive political
@@ -265,7 +267,7 @@ function Investors() {
         </li>
         <li>
           <img alt="Deccel" src="/investors/deccel.svg" className="h-14" />
-          <p className="mt-6 max-w-lg text-sm/6 text-gray-500">
+          <p className="mt-6 max-w-lg text-gray-500 text-sm/6">
             Deccel has been at the forefront of innovation, investing in
             pioneering companies across various sectors, including technology,
             consumer goods, and healthcare. Their philosophy of ‘plausible
@@ -280,7 +282,7 @@ function Investors() {
       <hr className="mt-6 border-t border-gray-200" />
       <ul
         role="list"
-        className="mx-auto mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid grid-cols-1 gap-8 mx-auto mt-16 sm:grid-cols-2 lg:grid-cols-3"
       >
         <Person
           name="Kristin Watson"
@@ -323,7 +325,7 @@ function Testimonial() {
       <img
         alt=""
         src="/testimonials/veronica-winton.jpg"
-        className="absolute inset-0 object-cover"
+        className="object-cover absolute inset-0"
       />
       <div
         aria-hidden="true"
@@ -336,9 +338,9 @@ function Testimonial() {
             business in 6 months.
           </p>
         </blockquote>
-        <figcaption className="mt-6 border-t border-white/20 pt-6">
-          <p className="text-sm/6 font-medium text-white">Veronica Winton</p>
-          <p className="text-sm/6 font-medium">
+        <figcaption className="pt-6 mt-6 border-t border-white/20">
+          <p className="font-medium text-white text-sm/6">Veronica Winton</p>
+          <p className="font-medium text-sm/6">
             <span className="bg-gradient-to-r from-[#fff1be] from-[28%] via-[#ee87cb] via-[70%] to-[#b060ff] bg-clip-text text-transparent">
               CSO, Planeteria
             </span>
@@ -379,13 +381,13 @@ function Careers() {
               </thead>
               <tbody>
                 <tr>
-                  <th scope="colgroup" colSpan={3} className="px-0 pb-0 pt-10">
-                    <div className="-mx-4 rounded-lg bg-gray-50 px-4 py-3 text-sm/6 font-semibold">
+                  <th scope="colgroup" colSpan={3} className="px-0 pt-10 pb-0">
+                    <div className="px-4 py-3 -mx-4 font-semibold bg-gray-50 rounded-lg text-sm/6">
                       Engineering
                     </div>
                   </th>
                 </tr>
-                <tr className="border-b border-dotted border-gray-200 text-sm/6 font-normal">
+                <tr className="font-normal border-b border-gray-200 border-dotted text-sm/6">
                   <td className="px-0 py-4">iOS Developer</td>
                   <td className="px-0 py-4 text-gray-600">Remote</td>
                   <td className="px-0 py-4 text-right">
@@ -394,7 +396,7 @@ function Careers() {
                     </Button>
                   </td>
                 </tr>
-                <tr className="border-b border-dotted border-gray-200 text-sm/6 font-normal">
+                <tr className="font-normal border-b border-gray-200 border-dotted text-sm/6">
                   <td className="px-0 py-4">Backend Engineer</td>
                   <td className="px-0 py-4 text-gray-600">Remote</td>
                   <td className="px-0 py-4 text-right">
@@ -403,7 +405,7 @@ function Careers() {
                     </Button>
                   </td>
                 </tr>
-                <tr className="text-sm/6 font-normal">
+                <tr className="font-normal text-sm/6">
                   <td className="px-0 py-4">Product Engineer</td>
                   <td className="px-0 py-4 text-gray-600">Remote</td>
                   <td className="px-0 py-4 text-right">
@@ -413,13 +415,13 @@ function Careers() {
                   </td>
                 </tr>
                 <tr>
-                  <th scope="colgroup" colSpan={3} className="px-0 pb-0 pt-5">
-                    <div className="-mx-4 rounded-lg bg-gray-50 px-4 py-3 text-sm/6 font-semibold">
+                  <th scope="colgroup" colSpan={3} className="px-0 pt-5 pb-0">
+                    <div className="px-4 py-3 -mx-4 font-semibold bg-gray-50 rounded-lg text-sm/6">
                       Design
                     </div>
                   </th>
                 </tr>
-                <tr className="border-b border-dotted border-gray-200 text-sm/6 font-normal">
+                <tr className="font-normal border-b border-gray-200 border-dotted text-sm/6">
                   <td className="px-0 py-4">Principal Designer</td>
                   <td className="px-0 py-4 text-gray-600">Remote</td>
                   <td className="px-0 py-4 text-right">
@@ -428,7 +430,7 @@ function Careers() {
                     </Button>
                   </td>
                 </tr>
-                <tr className="border-b border-dotted border-gray-200 text-sm/6 font-normal">
+                <tr className="font-normal border-b border-gray-200 border-dotted text-sm/6">
                   <td className="px-0 py-4">Designer</td>
                   <td className="px-0 py-4 text-gray-600">Remote</td>
                   <td className="px-0 py-4 text-right">
@@ -437,7 +439,7 @@ function Careers() {
                     </Button>
                   </td>
                 </tr>
-                <tr className="text-sm/6 font-normal">
+                <tr className="font-normal text-sm/6">
                   <td className="px-0 py-4">Senior Designer</td>
                   <td className="px-0 py-4 text-gray-600">Remote</td>
                   <td className="px-0 py-4 text-right">
@@ -464,9 +466,9 @@ export default function Company() {
         <Navbar />
       </Container>
       <Header />
-      <Team />
-      <Investors />
-      <Careers />
+      {/* TODO: Add <Team /> component back here later */}
+      {/* <Investors /> */}
+      {/* <Careers /> */}
       <Footer />
     </main>
   )

@@ -19,45 +19,32 @@ import { Heading, Subheading } from './text'
 
 const testimonials = [
   {
-    img: '/testimonials/tina-yards.jpg',
+    img: '/testimonials/cuts_founder.png',
     name: 'Steven Borrelli',
     title: 'Founder, CUTS Clothing',
     quote:
       'Thanks to Dream, our working capital is in a much healthier position enabling sustainable growth.',
   },
   {
-    img: '/testimonials/conor-neville.jpg',
+    img: '/testimonials/mezcla_founder.png',
     name: 'Griffin Spolansky',
     title: 'Founder, Mezcla',
     quote:
       'Dream allowed us to access capital quickly at a lower rate than competitors.',
   },
   {
-    img: '/testimonials/amy-chase.jpg',
+    img: '/testimonials/roomza_founder.png',
     name: 'Curtis Crimmins',
     title: 'Co-Founder, Roomza',
     quote:
       'Revenue-based financing worked great for us.',
   },
   {
-    img: '/testimonials/veronica-winton.jpg',
+    img: '/testimonials/chubby_founder.png',
     name: 'Veronica Winton',
     title: 'Founder, Chubby Snacks',
     quote:
       'We’ve managed to put two of our main competitors out of business in 6 months.',
-  },
-  {
-    img: '/testimonials/dillon-lenora.jpg',
-    name: 'Dillon Lenora',
-    title: 'VP of Sales, Detax',
-    quote: 'I was able to replace 80% of my team with RadiantAI bots.',
-  },
-  {
-    img: '/testimonials/harriet-arron.jpg',
-    name: 'Harriet Arron',
-    title: 'Account Manager, Commit',
-    quote:
-      'I’ve smashed all my targets without having to speak to a lead in months.',
   },
 ]
 
@@ -121,7 +108,7 @@ function TestimonialCard({
       <img
         alt=""
         src={img}
-        className="absolute inset-x-0 top-0 object-cover w-full aspect-square"
+        className="object-cover absolute inset-x-0 top-0 w-full aspect-square"
       />
       <div
         aria-hidden="true"
@@ -161,7 +148,7 @@ function CallToAction() {
       <div className="mt-2">
         <Link
           href="#"
-          className="inline-flex items-center gap-2 font-medium text-pink-600 text-sm/6"
+          className="inline-flex gap-2 items-center font-medium text-pink-600 text-sm/6"
         >
           Get started
           <ArrowLongRightIcon className="size-5" />
@@ -188,7 +175,7 @@ export function Testimonials() {
   }
 
   return (
-    <div className="py-32 overflow-hidden">
+    <div className="overflow-hidden py-32">
       <Container>
         <div ref={setReferenceWindowRef}>
           <Subheading>What Our Companies Say</Subheading>
