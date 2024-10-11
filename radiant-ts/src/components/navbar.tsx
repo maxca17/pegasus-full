@@ -8,7 +8,7 @@ import {
 import { Bars2Icon } from '@heroicons/react/24/solid'
 import { motion } from 'framer-motion'
 import { Link } from './link'
-import { Logo } from './logo'
+//import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
 
 const links = [
@@ -20,9 +20,9 @@ const links = [
 
 function DesktopNav() {
   return (
-    <nav className="relative hidden lg:flex">
+    <nav className="hidden relative lg:flex">
       {links.map(({ href, label }) => (
-        <PlusGridItem key={href} className="relative flex">
+        <PlusGridItem key={href} className="flex relative">
           <Link
             href={href}
             className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-[hover]:bg-black/[2.5%]"
@@ -67,9 +67,9 @@ function MobileNav() {
           </motion.div>
         ))}
       </div>
-      <div className="absolute w-screen -translate-x-1/2 left-1/2">
+      <div className="absolute left-1/2 w-screen -translate-x-1/2">
         <div className="absolute inset-x-0 top-0 border-t border-black/5" />
-        <div className="absolute inset-x-0 border-t top-2 border-black/5" />
+        <div className="absolute inset-x-0 top-2 border-t border-black/5" />
       </div>
     </DisclosurePanel>
   )
@@ -79,15 +79,15 @@ export function Navbar({ banner }: { banner?: React.ReactNode }) {
   return (
     <Disclosure as="header" className="pt-12 sm:pt-16">
       <PlusGrid>
-        <PlusGridRow className="relative flex justify-between">
-          <div className="relative flex gap-6">
+        <PlusGridRow className="flex relative justify-between">
+          <div className="flex relative gap-6">
             <PlusGridItem className="py-3">
               <Link href="/" title="Home">
-                <Logo className="h-9" />
+                <img src='/logos/logo.png' alt="Logo" className="h-9" />
               </Link>
             </PlusGridItem>
             {banner && (
-              <div className="relative items-center hidden py-3 lg:flex">
+              <div className="hidden relative items-center py-3 lg:flex">
                 {banner}
               </div>
             )}

@@ -3,7 +3,6 @@ import { Button } from './button'
 import { Container } from './container'
 import { Gradient } from './gradient'
 import { Link } from './link'
-import { Logo } from './logo'
 import { Subheading } from './text'
 
 function CallToAction() {
@@ -15,9 +14,8 @@ function CallToAction() {
           Ready to dive in?
         </p>
       </hgroup>
-      <p className="max-w-xs mx-auto mt-6 text-gray-500 text-sm/6">
-        Get the cheat codes for selling and unlock your team&apos;s revenue
-        potential.
+      <p className="mx-auto mt-6 max-w-xs text-gray-500 text-sm/6">
+        Get the cheat codes for selling and unlock your team&apos;s revenue potential.
       </p>
       <div className="mt-6">
         <Button className="w-full sm:w-auto" href="/blog">
@@ -145,10 +143,15 @@ export function Footer() {
           <CallToAction />
           <PlusGrid className="pb-16">
             <PlusGridRow>
-              <div className="grid grid-cols-2 pb-6 gap-y-10 lg:grid-cols-6 lg:gap-8">
+              <div className="grid grid-cols-2 gap-y-10 pb-6 lg:grid-cols-6 lg:gap-8">
                 <div className="flex col-span-2">
                   <PlusGridItem className="pt-6 lg:pb-6">
-                    <Logo className="h-9" />
+                    {/* Hardcode the logo here */}
+                    <img 
+                      src='/logos/logo.png'  // Update the path if necessary
+                      alt="Logo"
+                      className="h-9"  // You can adjust the height and other styles as needed
+                    />
                   </PlusGridItem>
                 </div>
                 <div className="grid grid-cols-2 col-span-2 gap-x-8 gap-y-12 lg:col-span-4 lg:grid-cols-subgrid lg:pt-6">
@@ -163,7 +166,7 @@ export function Footer() {
                 </PlusGridItem>
               </div>
               <div className="flex">
-                <PlusGridItem className="flex items-center gap-8 py-3">
+                <PlusGridItem className="flex gap-8 items-center py-3">
                   <SocialLinks />
                 </PlusGridItem>
               </div>
