@@ -162,7 +162,7 @@ function DarkBentoSection() {
             title="Transparent Solutions"
             description="Leveraging our deep understanding of your business, we tailor financing solutions to be transparent, with no hidden fees, providing you with a clear and fair financial roadmap."
             graphic={
-              <div className="h-80 bg-[url(/screenshots/engagement.png)] bg-[size:851px_344px] bg-no-repeat" />
+              <div className="h-80 bg-[url(/screenshots/image.png)] bg-[size:851px_344px] bg-no-repeat" />
             }
             fade={['top']}
             className="max-lg:rounded-b-4xl lg:col-span-4 lg:rounded-br-4xl"

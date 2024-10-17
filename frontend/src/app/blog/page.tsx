@@ -53,15 +53,28 @@ export default function IntakeForm() {
 
       // Upload files to Supabase Storage
       const uploadFile = async (file: File, path: string) => {
-        const { data, error } = await supabase.storage
-          .from('company_uploads') // Hardcoded bucket name
-          .upload(path, file, {
-            cacheControl: '3600',
-            upsert: false,
-          })
+        try {
+          const { data, error } = await supabase.storage
+            .from('company_uploads') // Ensure this bucket exists and has proper permissions
+            .upload(path, file, {
+              cacheControl: '3600',
+              upsert: false,
+            })
 
-        if (error) throw error
-        return data.path
+          if (error) {
+            console.error('Supabase storage error:', error)
+            throw error
+          }
+
+          if (!data) {
+            throw new Error('No data returned from upload')
+          }
+
+          return data.path
+        } catch (error) {
+          console.error('File upload failed:', error)
+          throw new Error('File upload failed. Please try again.')
+        }
       }
 
       // Upload each file and get its path
@@ -134,14 +147,47 @@ export default function IntakeForm() {
       if (insertError) throw insertError
 
       // Show success message and redirect to homepage
-      alert('Submission Successful!')
-      router.push('/')
+      setShowSuccessPopup(true);
+      setTimeout(() => {
+        setShowSuccessPopup(false);
+        router.push('/');
+      }, 5000);
     } catch (error) {
-      console.error('Error during submission:', error)
-      alert('An error occurred during submission. Please try again.')
+      console.error('Error during submission:', error);
+      setShowErrorPopup(true);
+      setTimeout(() => {
+        setShowErrorPopup(false);
+      }, 5000);
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
+  }
+
+  // Add these state variables at the top of your component
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+
+  // Add this JSX right before the return statement
+  if (showSuccessPopup) {
+    return (
+      <div className="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-50">
+        <div className="p-8 bg-white rounded-lg shadow-xl">
+          <h2 className="mb-4 text-2xl font-bold text-black-600">Submission Successful!</h2>
+          <p className="text-gray-600">Redirecting to homepage in 5 seconds...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (showErrorPopup) {
+    return (
+      <div className="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-50">
+        <div className="p-8 bg-white rounded-lg shadow-xl">
+          <h2 className="mb-4 text-2xl font-bold text-red-600">Submission Error</h2>
+          <p className="text-gray-600">An error occurred during submission. Please try again.</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -240,7 +286,7 @@ export default function IntakeForm() {
                     <input
                       id="website"
                       name="website"
-                      type="url"
+                      type="text"
                       required
                       placeholder="https://www.example.com"
                       className="block px-3 py-2 w-full placeholder-gray-400 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -451,13 +497,13 @@ export default function IntakeForm() {
                   Income Statement
                 </label>
                 <div className="mt-2">
-                  <input
+                  {/* <input
                     id="income-statement"
                     name="income-statement"
                     type="file"
                     accept=".pdf,.doc,.docx,.xls,.xlsx"
                     className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  />
+                  /> */}
                 </div>
               </div>
 
@@ -470,13 +516,13 @@ export default function IntakeForm() {
                   Balance Sheet
                 </label>
                 <div className="mt-2">
-                  <input
+                  {/* <input
                     id="balance-sheet"
                     name="balance-sheet"
                     type="file"
                     accept=".pdf,.doc,.docx,.xls,.xlsx"
                     className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  />
+                  /> */}
                 </div>
               </div>
               {/* Cash Flow Statement */}
@@ -488,13 +534,13 @@ export default function IntakeForm() {
                   Cash Flow Statement
                 </label>
                 <div className="mt-2">
-                  <input
+                  {/* <input
                     id="cash-flow-statement"
                     name="cash-flow-statement"
                     type="file"
                     accept=".pdf,.doc,.docx,.xls,.xlsx"
                     className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  />
+                  /> */}
                 </div>
               </div>
 
@@ -507,13 +553,13 @@ export default function IntakeForm() {
                   Latest Company Deck
                 </label>
                 <div className="mt-2">
-                  <input
+                  {/* <input
                     id="latest-company-deck"
                     name="latest-company-deck"
                     type="file"
                     accept=".pdf,.ppt,.pptx"
                     className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
@@ -535,14 +581,14 @@ export default function IntakeForm() {
                 Additional Supporting Documents
               </label>
               <div className="mt-2">
-                <input
+                {/* <input
                   id="additional-documents"
                   name="additional-documents"
                   type="file"
                   multiple
                   accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
                   className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                />
+                /> */}
               </div>
             </div>
           </section>
