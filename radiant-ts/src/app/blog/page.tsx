@@ -1,10 +1,149 @@
+// app/intake-form/page.tsx
+'use client'
+
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@supabase/supabase-js'
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import { Container } from '@/components/container'
 import { GradientBackground } from '@/components/gradient'
-import { Button } from '@/components/button' // Assuming you have a Button component
+import { Button } from '@/components/button'
+import { v4 as uuidv4 } from 'uuid'
+
+// Initialize Supabase client with hardcoded API keys
+const supabaseUrl = 'https://nflnbqnrvuulmkysyawx.supabase.co'
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5mbG5icW5ydnV1bG1reXN5YXd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAwNjIxNTEsImV4cCI6MjAzNTYzODE1MX0.WH-_jPV4YJZCKw6W4aOD-_zglcBrufBnPUoRNXcKu34'
+const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export default function IntakeForm() {
+  const router = useRouter()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const formData = new FormData(event.currentTarget)
+
+      // Extract form fields
+      const name = formData.get('name') as string
+      const email = formData.get('email') as string
+      const phone = formData.get('phone') as string
+      const website = formData.get('website') as string
+      const companyDescription = formData.get('company-description') as string
+      const companyType = formData.get('company-type') as string
+      const fundingRequirement = formData.get('funding-requirement') as string
+      const businessLegalName = formData.get('legal-name') as string
+      const legalEntityType = formData.get('legal-entity-type') as string
+      const ein = formData.get('ein') as string
+      const monthlyRevenueRange = formData.get('monthly-revenue') as string
+      const agreeNda = formData.get('agree-nda') === 'on'
+
+      // Extract files
+      const incomeStatementFile = formData.get('income-statement') as File
+      const balanceSheetFile = formData.get('balance-sheet') as File
+      const cashFlowStatementFile = formData.get('cash-flow-statement') as File
+      const companyDeckFile = formData.get('latest-company-deck') as File
+      const additionalDocumentsFiles = formData.getAll('additional-documents') as File[]
+
+      // Generate a unique identifier for the company
+      const companyId = uuidv4()
+
+      // Upload files to Supabase Storage
+      const uploadFile = async (file: File, path: string) => {
+        const { data, error } = await supabase.storage
+          .from('company_uploads') // Hardcoded bucket name
+          .upload(path, file, {
+            cacheControl: '3600',
+            upsert: false,
+          })
+
+        if (error) throw error
+        return data.path
+      }
+
+      // Upload each file and get its path
+      const incomeStatementPath = incomeStatementFile
+        ? await uploadFile(
+            incomeStatementFile,
+            `${companyId}/income_statement/${incomeStatementFile.name}`
+          )
+        : null
+
+      const balanceSheetPath = balanceSheetFile
+        ? await uploadFile(
+            balanceSheetFile,
+            `${companyId}/balance_sheet/${balanceSheetFile.name}`
+          )
+        : null
+
+      const cashFlowStatementPath = cashFlowStatementFile
+        ? await uploadFile(
+            cashFlowStatementFile,
+            `${companyId}/cash_flow_statement/${cashFlowStatementFile.name}`
+          )
+        : null
+
+      const companyDeckPath = companyDeckFile
+        ? await uploadFile(
+            companyDeckFile,
+            `${companyId}/company_deck/${companyDeckFile.name}`
+          )
+        : null
+
+      const additionalDocumentsPaths: string[] = []
+      for (const file of additionalDocumentsFiles) {
+        if (file && file.name) {
+          const path = await uploadFile(
+            file,
+            `${companyId}/additional_documents/${file.name}`
+          )
+          additionalDocumentsPaths.push(path)
+        }
+      }
+
+      // Prepare data for insertion
+      const companyData = {
+        id: companyId,
+        name,
+        email,
+        phone,
+        website,
+        company_description: companyDescription,
+        company_type: companyType,
+        funding_requirement: fundingRequirement,
+        business_legal_name: businessLegalName,
+        legal_entity_type: legalEntityType,
+        ein,
+        monthly_revenue_range: monthlyRevenueRange,
+        agree_nda: agreeNda,
+        income_statement_path: incomeStatementPath,
+        balance_sheet_path: balanceSheetPath,
+        cash_flow_statement_path: cashFlowStatementPath,
+        company_deck_path: companyDeckPath,
+        additional_documents_paths: additionalDocumentsPaths,
+      }
+
+      // Insert data into Supabase
+      const { error: insertError } = await supabase
+        .from('companies')
+        .insert([companyData])
+
+      if (insertError) throw insertError
+
+      // Show success message and redirect to homepage
+      alert('Submission Successful!')
+      router.push('/')
+    } catch (error) {
+      console.error('Error during submission:', error)
+      alert('An error occurred during submission. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <main className="overflow-hidden">
       <GradientBackground />
@@ -12,18 +151,21 @@ export default function IntakeForm() {
         <Navbar />
       </Container>
       <Container className="mt-16">
-        <div className="space-y-16">
+        <form className="space-y-16" onSubmit={handleSubmit}>
           {/* Personal Information */}
           <section>
             <h2 className="text-2xl font-medium tracking-tight">Personal Information</h2>
             <p className="mt-4 text-gray-600 text-sm/6">
               Please provide your personal details below.
             </p>
-            <form className="mt-8">
+            <div className="mt-8">
               <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 {/* Name */}
                 <div className="sm:col-span-3">
-                  <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Name
                   </label>
                   <div className="mt-2">
@@ -39,7 +181,10 @@ export default function IntakeForm() {
 
                 {/* Email */}
                 <div className="sm:col-span-3">
-                  <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Email
                   </label>
                   <div className="mt-2">
@@ -55,7 +200,10 @@ export default function IntakeForm() {
 
                 {/* Phone Number */}
                 <div className="sm:col-span-3">
-                  <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Phone Number
                   </label>
                   <div className="mt-2">
@@ -69,7 +217,7 @@ export default function IntakeForm() {
                   </div>
                 </div>
               </div>
-            </form>
+            </div>
           </section>
 
           {/* Company Information */}
@@ -78,11 +226,14 @@ export default function IntakeForm() {
             <p className="mt-4 text-gray-600 text-sm/6">
               Provide details about your company.
             </p>
-            <form className="mt-8">
+            <div className="mt-8">
               <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 {/* Website */}
                 <div className="sm:col-span-4">
-                  <label htmlFor="website" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="website"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Website
                   </label>
                   <div className="mt-2">
@@ -99,7 +250,10 @@ export default function IntakeForm() {
 
                 {/* Company Description */}
                 <div className="col-span-full">
-                  <label htmlFor="company-description" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="company-description"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Company Description
                   </label>
                   <div className="mt-2">
@@ -115,7 +269,10 @@ export default function IntakeForm() {
 
                 {/* Company Type */}
                 <div className="sm:col-span-3">
-                  <label htmlFor="company-type" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="company-type"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Company Type
                   </label>
                   <div className="mt-2">
@@ -136,7 +293,10 @@ export default function IntakeForm() {
 
                 {/* Funding Requirement */}
                 <div className="sm:col-span-3">
-                  <label htmlFor="funding-requirement" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="funding-requirement"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Funding Requirement
                   </label>
                   <div className="mt-2">
@@ -158,7 +318,10 @@ export default function IntakeForm() {
 
                 {/* Business Legal Name */}
                 <div className="sm:col-span-3">
-                  <label htmlFor="legal-name" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="legal-name"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Business Legal Name
                   </label>
                   <div className="mt-2">
@@ -174,7 +337,10 @@ export default function IntakeForm() {
 
                 {/* Legal Entity Type */}
                 <div className="sm:col-span-3">
-                  <label htmlFor="legal-entity-type" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="legal-entity-type"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Legal Entity Type
                   </label>
                   <div className="mt-2">
@@ -185,7 +351,6 @@ export default function IntakeForm() {
                       className="block px-3 py-2 w-full text-gray-900 bg-white rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
                       <option value="">Select a type</option>
-                      {/* Replace with your provided list */}
                       <option>LLC</option>
                       <option>C-Corporation</option>
                       <option>S-Corporation</option>
@@ -197,7 +362,10 @@ export default function IntakeForm() {
 
                 {/* EIN */}
                 <div className="sm:col-span-3">
-                  <label htmlFor="ein" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="ein"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     EIN
                   </label>
                   <div className="mt-2">
@@ -214,7 +382,10 @@ export default function IntakeForm() {
 
                 {/* Monthly Revenue Range */}
                 <div className="sm:col-span-3">
-                  <label htmlFor="monthly-revenue" className="block text-sm font-medium leading-6 text-gray-900">
+                  <label
+                    htmlFor="monthly-revenue"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Monthly Revenue Range
                   </label>
                   <div className="mt-2">
@@ -234,7 +405,7 @@ export default function IntakeForm() {
                   </div>
                 </div>
               </div>
-            </form>
+            </div>
           </section>
 
           {/* NDA Placeholder */}
@@ -270,105 +441,119 @@ export default function IntakeForm() {
             <p className="mt-4 text-gray-600 text-sm/6">
               Upload your financial documents below.
             </p>
-            <form className="mt-8">
-              <div className="space-y-8">
-                {/* Income Statement */}
-                <div>
-                  <label htmlFor="income-statement" className="block text-sm font-medium leading-6 text-gray-900">
-                    Income Statement
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="income-statement"
-                      name="income-statement"
-                      type="file"
-                      required
-                      className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                    />
-                  </div>
-                </div>
-
-                {/* Balance Sheet */}
-                <div>
-                  <label htmlFor="balance-sheet" className="block text-sm font-medium leading-6 text-gray-900">
-                    Balance Sheet
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="balance-sheet"
-                      name="balance-sheet"
-                      type="file"
-                      required
-                      className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                    />
-                  </div>
-                </div>
-                {/* Cash Flow Statement */}
-                <div>
-                  <label htmlFor="cash-flow-statement" className="block text-sm font-medium leading-6 text-gray-900">
-                    Cash Flow Statement
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="cash-flow-statement"
-                      name="cash-flow-statement"
-                      type="file"
-                      required
-                      className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="latest-company-deck" className="block text-sm font-medium leading-6 text-gray-900">
-                    Latest Company Deck
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="latest-company-deck"
-                      name="latest-company-deck"
-                      type="file"
-                      required
-                      className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                    />
-                  </div>
-                </div>
-              </div>
-            </form>
-          </section>
-
-          {/* Additional Supporting Documents */}
-          <section>
-            <h2 className="text-2xl font-medium tracking-tight">Additional Supporting Documents</h2>
-            <p className="mt-4 text-gray-600 text-sm/6">
-              Upload any additional documents such as budget models, velocities, etc.
-            </p>
-            <form className="mt-8">
+            <div className="mt-8 space-y-8">
+              {/* Income Statement */}
               <div>
-                <label htmlFor="additional-documents" className="block text-sm font-medium leading-6 text-gray-900">
-                  Additional Supporting Documents
+                <label
+                  htmlFor="income-statement"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Income Statement
                 </label>
                 <div className="mt-2">
                   <input
-                    id="additional-documents"
-                    name="additional-documents"
+                    id="income-statement"
+                    name="income-statement"
                     type="file"
-                    multiple
+                    accept=".pdf,.doc,.docx,.xls,.xlsx"
                     className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
                   />
                 </div>
               </div>
-            </form>
+
+              {/* Balance Sheet */}
+              <div>
+                <label
+                  htmlFor="balance-sheet"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Balance Sheet
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="balance-sheet"
+                    name="balance-sheet"
+                    type="file"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx"
+                    className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                  />
+                </div>
+              </div>
+              {/* Cash Flow Statement */}
+              <div>
+                <label
+                  htmlFor="cash-flow-statement"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Cash Flow Statement
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="cash-flow-statement"
+                    name="cash-flow-statement"
+                    type="file"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx"
+                    className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                  />
+                </div>
+              </div>
+
+              {/* Latest Company Deck */}
+              <div>
+                <label
+                  htmlFor="latest-company-deck"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Latest Company Deck
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="latest-company-deck"
+                    name="latest-company-deck"
+                    type="file"
+                    accept=".pdf,.ppt,.pptx"
+                    className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Additional Supporting Documents */}
+          <section>
+            <h2 className="text-2xl font-medium tracking-tight">
+              Additional Supporting Documents
+            </h2>
+            <p className="mt-4 text-gray-600 text-sm/6">
+              Upload any additional documents such as budget models, velocities, etc.
+            </p>
+            <div className="mt-8">
+              <label
+                htmlFor="additional-documents"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Additional Supporting Documents
+              </label>
+              <div className="mt-2">
+                <input
+                  id="additional-documents"
+                  name="additional-documents"
+                  type="file"
+                  multiple
+                  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                  className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                />
+              </div>
+            </div>
           </section>
 
           {/* Submit Button */}
           <div className="flex justify-end items-center mt-8">
-            {/* Using your Button component for consistency */}
-            <Button type="submit" className="px-6 py-3">
-              Submit
+            <Button type="submit" className="px-6 py-3" disabled={isSubmitting}>
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </Button>
           </div>
-        </div>
+        </form>
       </Container>
       {/* Adjusted Footer to cover the whole screen */}
       <div className="mt-16">
@@ -377,4 +562,3 @@ export default function IntakeForm() {
     </main>
   )
 }
-

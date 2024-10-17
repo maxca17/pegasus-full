@@ -21,8 +21,9 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   description:
-    'Radiant helps you sell more by revealing sensitive information about your customers.',
+    'Dream Credit is a private credit fund offering tailored financing solutions to help businesses achieve financial growth and stability through structured credit investments.',
 }
+
 
 
 // Top Section of the page (includes the navbar and the hero section)
@@ -116,6 +117,7 @@ function BentoSection() {
 }
 
 
+
 function DarkBentoSection() {
   return (
     <div className="py-32 mx-2 mt-2 bg-gray-900 rounded-4xl">
@@ -148,17 +150,17 @@ function DarkBentoSection() {
           />
           <BentoCard
             dark
-            eyebrow="Meetings"
-            title="Smart call scheduling"
-            description="Automatically insert intro calls into your leads' calendars without their consent."
+            eyebrow="Collaborative Diligence"
+            title="Leveraging Insight and Context"
+            description="After the system integration, we engage directly with your team through diligence calls. These conversations provide us with critical context and insights beyond the data, ensuring we fully understand your business and its unique needs."
             graphic={<LinkedAvatars />}
             className="lg:col-span-2 lg:rounded-bl-4xl"
           />
           <BentoCard
             dark
-            eyebrow="Engagement"
-            title="Become a thought leader"
-            description="RadiantAI automatically writes LinkedIn posts that relate current events to B2B sales, helping you build a reputation as a thought leader."
+            eyebrow="Tailored Financing"
+            title="Transparent Solutions"
+            description="Leveraging our deep understanding of your business, we tailor financing solutions to be transparent, with no hidden fees, providing you with a clear and fair financial roadmap."
             graphic={
               <div className="h-80 bg-[url(/screenshots/engagement.png)] bg-[size:851px_344px] bg-no-repeat" />
             }
@@ -181,7 +183,6 @@ export default function Home() {
         </Container>
         <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
 
-          <BentoSection />
         </div>
         <DarkBentoSection />
       </main>
