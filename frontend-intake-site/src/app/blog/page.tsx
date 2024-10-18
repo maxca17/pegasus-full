@@ -498,13 +498,13 @@ export default function IntakeForm() {
                   Income Statement
                 </label>
                 <div className="mt-2">
-                  {/* <input
+                   <input
                     id="income-statement"
                     name="income-statement"
                     type="file"
                     accept=".pdf,.doc,.docx,.xls,.xlsx"
                     className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  /> */}
+                  /> 
                 </div>
               </div>
 
