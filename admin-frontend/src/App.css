@@ -1,0 +1,106 @@
+/* App.css */
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px 0;
+  margin: 0;
+  font-size: 2.5em;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Cards Container */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card Styles */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.8em;
+  color: #2c3e50;
+}
+
+.card p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.card p strong {
+  color: #7f8c8d;
+}
+
+.card a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+.card h3 {
+  margin-top: 30px;
+  font-size: 1.4em;
+  color: #2c3e50;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0 0;
+}
+
+.card ul li {
+  margin: 8px 0;
+}
+
+.card ul li a {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.card ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    padding: 20px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+}
