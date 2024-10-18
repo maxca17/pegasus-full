@@ -137,6 +137,7 @@ export default function IntakeForm() {
         cash_flow_statement_path: cashFlowStatementPath,
         company_deck_path: companyDeckPath,
         additional_documents_paths: additionalDocumentsPaths,
+        created_at: new Date().toISOString(), // Add the current date and time
       }
 
       // Insert data into Supabase
@@ -516,13 +517,13 @@ export default function IntakeForm() {
                   Balance Sheet
                 </label>
                 <div className="mt-2">
-                  {/* <input
+                   <input
                     id="balance-sheet"
                     name="balance-sheet"
                     type="file"
                     accept=".pdf,.doc,.docx,.xls,.xlsx"
                     className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  /> */}
+                  /> 
                 </div>
               </div>
               {/* Cash Flow Statement */}
@@ -534,13 +535,13 @@ export default function IntakeForm() {
                   Cash Flow Statement
                 </label>
                 <div className="mt-2">
-                  {/* <input
+                   <input
                     id="cash-flow-statement"
                     name="cash-flow-statement"
                     type="file"
                     accept=".pdf,.doc,.docx,.xls,.xlsx"
                     className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  /> */}
+                  /> 
                 </div>
               </div>
 
@@ -553,13 +554,13 @@ export default function IntakeForm() {
                   Latest Company Deck
                 </label>
                 <div className="mt-2">
-                  {/* <input
+                   <input
                     id="latest-company-deck"
                     name="latest-company-deck"
                     type="file"
                     accept=".pdf,.ppt,.pptx"
                     className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                  /> */}
+                  /> 
                 </div>
               </div>
             </div>
@@ -581,14 +582,14 @@ export default function IntakeForm() {
                 Additional Supporting Documents
               </label>
               <div className="mt-2">
-                {/* <input
+                 <input
                   id="additional-documents"
                   name="additional-documents"
                   type="file"
                   multiple
                   accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
                   className="block w-full text-sm text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-600"
-                /> */}
+                /> 
               </div>
             </div>
           </section>
